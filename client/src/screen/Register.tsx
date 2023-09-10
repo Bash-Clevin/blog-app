@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const Login = () => {
+const Register = () => {
   return (
     <>
       {/**custom navbar */}
@@ -9,12 +9,17 @@ const Login = () => {
           <Link to="/">Blog</Link>
         </h1>
         <h3>
-          <Link to="/register">Register</Link>
+          <Link to="/login">Login</Link>
         </h3>
       </div>
       <div className="w-full flex justify-center items-center h-[80vh]">
         <div className="flex flex-col justify-center items-center space-y-4 w-[80%] md:w-[25%]">
-          <h1 className="text-xl font-bold text-left">LogIn</h1>
+          <h1 className="text-xl font-bold text-left">Create Account</h1>
+          <input
+            className="w-full px-4 py-2 border-2 border-black outline-0"
+            type="text"
+            placeholder="Enter your username"
+          />
           <input
             className="w-full px-4 py-2 border-2 border-black outline-0"
             type="text"
@@ -29,12 +34,12 @@ const Login = () => {
             className="w-full px-4 py-4 text-lg font-bold text-white bg-black rounded-lg
          hover:bg-gray-500 hover:text-black"
           >
-            Log In
+            Register
           </button>
           <div className="flex justify-center items-center space-x-3">
-            <p>New User?</p>
+            <p>Have an account?</p>
             <p className="text-gray-500 hover:text-black">
-              <Link to="/register">Register</Link>
+              <Link to="/login">LogIn</Link>
             </p>
           </div>
         </div>
@@ -43,4 +48,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
