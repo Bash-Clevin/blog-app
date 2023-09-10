@@ -22,7 +22,7 @@ const Posts = () => {
             <p>12:31</p>
           </div>
         </div>
-        <p>
+        <p className="md:text-lg">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit,
           autem. Facilis ab fugit sed quasi, officia temporibus modi accusantium
           nostrum sint nisi impedit provident quisquam, repellat laborum esse.
