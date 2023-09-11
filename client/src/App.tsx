@@ -4,6 +4,7 @@ import Home from './screen/Home';
 import Login from './screen/Login';
 import Register from './screen/Register';
 import Article from './screen/Article';
+import CreatePost from './screen/CreatePost';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/writepost" element={<CreatePost />} />
         <Route path="/posts/post/:id" element={<Article />} />
       </Routes>
     </div>

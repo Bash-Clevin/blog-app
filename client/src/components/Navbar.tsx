@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { BsSearch } from 'react-icons/bs';
 
 const Navbar = () => {
-  const userSignedIn: boolean = false;
+  const userSignedIn: boolean = true;
   return (
     <div className="flex items-center justify-between px-6 md:px-[200px] py-4">
       <h1 className="text-lg font-extrabold md:text-xl">
