@@ -2,7 +2,7 @@ const Footer = () => {
   return (
     <>
       <div
-        className="mt-8 w-full bg-black px-8 flex flex-col space-y-4  md:space-y-0 md:justify-between text-sm py-8 
+        className="mt-8 fixed left-0 bottom-[2%] w-full bg-black px-8 flex flex-col space-y-4  md:space-y-0 md:justify-between text-sm py-8 
       items-start md:text-md md:px-[500px] md:flex-row"
       >
         <div className="text-white flex flex-col">
@@ -21,7 +21,7 @@ const Footer = () => {
           <p>Terms & Conditions</p>
         </div>
       </div>
-      <p className="py-2 pb-2 text-center text-white bg-black">
+      <p className="fixed w-full bottom-0 py-2 pb-2 text-center text-white bg-black">
         All rights reserved @Clevin-Bash blog 2023
       </p>
     </>
