@@ -1,8 +1,24 @@
+import { useState } from 'react';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import { ImCross } from 'react-icons/im';
 
 const CreatePost = () => {
+  const [category, setCategory] = useState('');
+  const [categories, setCategories] = useState<string[]>([]);
+
+  const addCategory = () => {
+    const updatedCategories: string[] = [...categories];
+    updatedCategories.push(category);
+    setCategory('');
+    setCategories(updatedCategories);
+  };
+
+  const deleteCategory = (i: number) => {
+    const updatedCategories: string[] = [...categories];
+    updatedCategories.splice(i);
+    setCategories(updatedCategories);
+  };
   return (
     <div>
       <Navbar />
@@ -23,26 +39,33 @@ const CreatePost = () => {
               <input
                 className="px-4 py-2 outline-none"
                 type="text"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
                 placeholder="Enter post category"
               />
-              <div className="bg-black text-white px-4 py-2 font-semibold cursor-pointer">
+              <div
+                className="bg-black text-white px-4 py-2 font-semibold cursor-pointer"
+                onClick={addCategory}
+              >
                 Add
               </div>
             </div>
             {/** categories */}
             <div className="flex px-4 mt-3">
-              <div className="flex justify-center items-center space-x-2 mr-4 bg-gray-200 px-2 py-1 rounded-md">
-                <p>Tech</p>
-                <p className="text-white bg-black rounded-full cursor-pointer p-1 text-sm">
-                  <ImCross />
-                </p>
-              </div>
-              <div className="flex justify-center items-center space-x-2 mr-4 bg-gray-200 px-2 py-1 rounded-md">
-                <p>Tech</p>
-                <p className="text-white bg-black rounded-full cursor-pointer p-1 text-sm">
-                  <ImCross />
-                </p>
-              </div>
+              {categories?.map((category, index) => (
+                <div
+                  key={index}
+                  className="flex justify-center items-center space-x-2 mr-4 bg-gray-200 px-2 py-1 rounded-md"
+                >
+                  <p>{category}</p>
+                  <p
+                    className="text-white bg-black rounded-full cursor-pointer p-1 text-sm"
+                    onClick={() => deleteCategory(index)}
+                  >
+                    <ImCross />
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
           <textarea
