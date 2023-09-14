@@ -1,8 +1,11 @@
-import express from 'express';
+import express, { json } from 'express';
 import mongoose from 'mongoose';
 import 'dotenv/config';
+import authRoute from './routes/auth';
 
 const app = express();
+app.use(json());
+app.use('/api/auth', authRoute);
 
 const mongoUrl: string = process.env.MONGO_URL || 'mongodb://localhost:27017';
 const port: number = Number(process.env.PORT) || 5000;
