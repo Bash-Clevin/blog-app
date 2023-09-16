@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response, Router } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/User';
@@ -7,7 +7,7 @@ import env from '../lib/env';
 const router = express.Router();
 
 // register user
-router.post('/register', async (req, res) => {
+router.post('/register', async (req: Request, res: Response) => {
   try {
     const { username, email, password } = req.body;
 
@@ -23,7 +23,7 @@ router.post('/register', async (req, res) => {
 });
 
 // login
-router.post('/login', async (req, res) => {
+router.post('/login', async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -46,13 +46,22 @@ router.post('/login', async (req, res) => {
     }
 
     const token = jwt.sign({ id: user._id }, env.secret, { expiresIn: '3h' });
-    const { ...info } = user;
-    res.cookie('token', token).status(200).json(info);
+    res.cookie('token', token).status(200).json(user);
   } catch (error) {
     res.status(500).json(error);
   }
 });
 
 // logout
+router.get('/logout', async (req: Request, res: Response) => {
+  try {
+    res
+      .clearCookie('token', { sameSite: 'none', secure: true })
+      .status(200)
+      .json('User signed out');
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 export default router;
