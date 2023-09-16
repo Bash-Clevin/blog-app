@@ -2,6 +2,7 @@ import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/User';
+import env from '../lib/env';
 
 const router = express.Router();
 
@@ -38,16 +39,20 @@ router.post('/login', async (req, res) => {
       return res.status(404).json('User not found');
     }
 
-    const passwordMatch = bcrypt.compareSync(password, user.password);
+    const passwordMatch = await bcrypt.compareSync(password, user.password);
 
     if (!passwordMatch) {
       return res.status(401).json('Wrong credentials');
     }
 
-    res.status(200).json(user);
+    const token = jwt.sign({ id: user._id }, env.secret, { expiresIn: '3h' });
+    const { ...info } = user;
+    res.cookie('token', token).status(200).json(info);
   } catch (error) {
     res.status(500).json(error);
   }
 });
+
+// logout
 
 export default router;
