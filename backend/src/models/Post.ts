@@ -1,6 +1,16 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
-const PostSchema = new mongoose.Schema(
+export interface PostModel extends Document {
+  title: string;
+  desc: string;
+  password: string;
+  photo: string;
+  username: string;
+  userId: string;
+  categories: Array<any>;
+}
+
+const PostSchema: Schema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -24,11 +34,11 @@ const PostSchema = new mongoose.Schema(
       required: true,
     },
     categories: {
-      type: Array,
+      type: Array<String>,
       required: false,
     },
   },
   { timestamps: true },
 );
 
-module.exports = mongoose.model('Post', PostSchema);
+export const Post = mongoose.model<PostModel>('Post', PostSchema);
