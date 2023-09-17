@@ -40,4 +40,17 @@ router.delete('/:id', async (req: Request, res: Response) => {
   }
 });
 
+// get user
+router.get('/:id', async (req: Request, res: Response) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (user === null) {
+      return res.status(404).json('user not found');
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 export default router;
