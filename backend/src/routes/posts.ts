@@ -65,4 +65,19 @@ router.get('/user/:userId', async (req: Request, res: Response) => {
   }
 });
 
+// search posts
+// router.get('/', async (req: Request, res: Response) => {
+//   const query = req.query;
+//   try {
+//     const searchFilter = {
+//       title: { $regex: query.search, $options: 'i' },
+//     };
+
+//     const posts = await Post.find(query.search ? searchFilter : null);
+//     res.status(200).json(posts);
+//   } catch (error) {
+//     res.status(500).json(error);
+//   }
+// });
+
 export default router;

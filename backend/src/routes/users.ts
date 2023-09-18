@@ -1,11 +1,12 @@
 import express, { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { User } from '../models/User';
+import verifyToken from '../middleware/verifyToken';
 
 const router = express.Router();
 
 // update User
-router.put('/:id', async (req: Request, res: Response) => {
+router.put('/:id', verifyToken, async (req: Request, res: Response) => {
   let { password } = req.body;
 
   if (!password) {
@@ -31,7 +32,7 @@ router.put('/:id', async (req: Request, res: Response) => {
 });
 
 // delete user
-router.delete('/:id', async (req: Request, res: Response) => {
+router.delete('/:id', verifyToken, async (req: Request, res: Response) => {
   try {
     await User.findByIdAndDelete(req.params.id);
     res.status(200).json('user has been deleted');
@@ -41,7 +42,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
 });
 
 // get user
-router.get('/:id', async (req: Request, res: Response) => {
+router.get('/:id', verifyToken, async (req: Request, res: Response) => {
   try {
     const user = await User.findById(req.params.id);
     if (user === null) {
