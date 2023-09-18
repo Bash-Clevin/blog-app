@@ -1,10 +1,11 @@
 import express, { Request, Response } from 'express';
 import { Comment } from '../models/Comment';
+import verifyToken from '../middleware/verifyToken';
 
 const router = express.Router();
 
 // create Comment
-router.post('/create', async (req: Request, res: Response) => {
+router.post('/create', verifyToken, async (req: Request, res: Response) => {
   try {
     const newComment = new Comment(req.body);
     const savedComment = await newComment.save();
@@ -15,7 +16,7 @@ router.post('/create', async (req: Request, res: Response) => {
 });
 
 // update Comment
-router.put('/:id', async (req: Request, res: Response) => {
+router.put('/:id', verifyToken, async (req: Request, res: Response) => {
   try {
     const updatedComment = await Comment.findByIdAndUpdate(
       req.params.id,
@@ -30,7 +31,7 @@ router.put('/:id', async (req: Request, res: Response) => {
 });
 
 // delete Comment
-router.delete('/:id', async (req: Request, res: Response) => {
+router.delete('/:id', verifyToken, async (req: Request, res: Response) => {
   try {
     await Comment.findByIdAndDelete(req.params.id);
     res.status(200).json('Comment has been deleted');

@@ -1,10 +1,11 @@
 import express, { Request, Response } from 'express';
 import { Post } from '../models/Post';
+import verifyToken from '../middleware/verifyToken';
 
 const router = express.Router();
 
 // create post
-router.post('/create', async (req: Request, res: Response) => {
+router.post('/create', verifyToken, async (req: Request, res: Response) => {
   try {
     const newPost = new Post(req.body);
     const savedPost = await newPost.save();
@@ -15,7 +16,7 @@ router.post('/create', async (req: Request, res: Response) => {
 });
 
 // update post
-router.put('/:id', async (req: Request, res: Response) => {
+router.put('/:id', verifyToken, async (req: Request, res: Response) => {
   try {
     const updatedPost = await Post.findByIdAndUpdate(
       req.params.id,
@@ -30,7 +31,7 @@ router.put('/:id', async (req: Request, res: Response) => {
 });
 
 // delete post
-router.delete('/:id', async (req: Request, res: Response) => {
+router.delete('/:id', verifyToken, async (req: Request, res: Response) => {
   try {
     await Post.findByIdAndDelete(req.params.id);
     res.status(200).json('Post has been deleted');
