@@ -38,9 +38,12 @@ const Navbar = () => {
           </h3>
         )}
         {userSignedIn ? (
-          <h3>
-            <Link to="/profile">Profile</Link>
-          </h3>
+          <div onClick={showMenu}>
+            <p className="cursor-pointer">
+              <FaBars />
+            </p>
+            {menu && <Menu />}
+          </div>
         ) : (
           <h3>
             <Link to="/register">Register</Link>
@@ -48,7 +51,7 @@ const Navbar = () => {
         )}
       </div>
       <div className="md:hidden text-lg" onClick={showMenu}>
-        <p>
+        <p className="cursor-pointer">
           <FaBars />
         </p>
         {menu && <Menu />}
