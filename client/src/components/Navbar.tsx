@@ -39,7 +39,7 @@ const Navbar = () => {
         )}
         {userSignedIn ? (
           <div onClick={showMenu}>
-            <p className="cursor-pointer">
+            <p className="cursor-pointer relative">
               <FaBars />
             </p>
             {menu && <Menu />}
@@ -51,7 +51,7 @@ const Navbar = () => {
         )}
       </div>
       <div className="md:hidden text-lg" onClick={showMenu}>
-        <p className="cursor-pointer">
+        <p className="cursor-pointer relative">
           <FaBars />
         </p>
         {menu && <Menu />}
